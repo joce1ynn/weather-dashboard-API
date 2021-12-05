@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <!-- header  -->
+    <header class="Jumbotron">
+        <h1 class="display-4 text-center">Weather Dashboard</h1>
+    </header>
+
+    <main class="row">
+        <!-- search form  -->
+        <div class="col-3">
+            <form class="form-group">
+                <label for="city" id="title">Search for a City:</label><br>
+                <input type="text" class="form-control" id="city-input"><br>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+
+            <!-- search history -->
+            <div class="list-group"></div>
+        </div>
+
+        <!-- display city Weather tab  -->
+        <div class="col-9">
+            <!-- current weather condition -->
+            <div id="current-weather"></div>
+
+            <!-- 5-Day Forecast -->
+            <div id="forecast">
+                <h3>5-Day Forecast:</h3>
+                <div class="row"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
+
