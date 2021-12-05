@@ -1,8 +1,37 @@
-body{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#title{
-    font-size: 25px;
-    font-weight: bold;
+#title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* UV Index color  */
+.uvi {
+  color: white;
+  padding: 0 15px;
+  border-radius: 5px;
+}
+.green {
+  background-color: green;
+}
+.yellow {
+  background-color: yellow;
+  color: black;
+}
+.orange {
+  background-color: orange;
+}
+.red {
+  background-color: red;
+}
+.purple {
+  background-color: purple;
+}
+
+/* icon size */
+.icon {
+  width: 50px;
+  height: 50px;
 }
