@@ -20,7 +20,7 @@ function savedCity() {
   // empty repeated city array elements and city weather history
   searchHistory.empty();
   currentWeatherEl.empty();
-  forecastCard.empty();
+  forecast.empty();
 
   displayList();
   getCurrentWeather();
@@ -49,7 +49,6 @@ function getCurrentWeather() {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
           displayCurrentWeather(data);
           getForecast(data);
         });
@@ -71,7 +70,6 @@ var getForecast = function (data) {
 
   fetch(forecastUrl).then(function (response) {
     response.json().then(function (data) {
-      console.log(data);
       displayForecast(data);
     });
   });
@@ -89,13 +87,14 @@ var displayCurrentWeather = function (data) {
   var currentTemp = $("<p>").text("Temp: " + ((data.main.temp - 273.15) * 1.8 + 32).toFixed() + "°F");
   var currentWind = $("<p>").text("Wind: " + data.wind.speed + " MPH");
   var currentHumidity = $("<p>").text("Humidity: " + data.main.humidity + "%");
+  $("#current-tab").addClass("current-card");
 
   city.append(today, currentIcon);
   currentWeatherEl.append(city, currentTemp, currentWind, currentHumidity);
 };
 
 // -----------------4. display 5-day forecast---------------------------
-var forecastCard = $("#forecast-cards");
+var forecast = $("#forecast");
 
 var displayForecast = function (data) {
   var forecastTitle = $("#future-dates");
@@ -126,6 +125,7 @@ var displayForecast = function (data) {
     var forecastTemp = $("<p>").text("Temp: " + ((data.daily[i].temp.day - 273.15) * 1.8 + 32).toFixed() + "°F");
     var forecastWind = $("<p>").text("Wind: " + data.daily[i].wind_speed + " MPH");
     var forecastHumidity = $("<p>").text("Humidity: " + data.daily[i].humidity + "%");
+    var forecastCard = $("<div>").addClass("card col-md-auto");
 
     forecastCard.append(
       date,
@@ -134,6 +134,8 @@ var displayForecast = function (data) {
       forecastWind,
       forecastHumidity
     );
+
+    forecast.append(forecastCard);
   }
 };
 

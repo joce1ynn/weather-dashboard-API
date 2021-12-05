@@ -2,12 +2,43 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+header {
+  background-color: #0754c7;
+  color: aliceblue;
+}
+
+/* search history */
+.search-history {
+  margin-left: 20px;
+  background-color: rgba(241, 245, 244, 0.945);
+  border-radius: 5px;
+}
+
+.list-group {
+  margin: 20px 0;
+}
+
+.list-group-item {
+  background-color: #E3F4FE;
+  text-align: center;
+  margin: 6px 0;
+  border-radius: 5px;
+}
+
 #title {
-  font-size: 25px;
+  font-size: 23px;
   font-weight: bold;
 }
 
-/* UV Index color  */
+/* curren weather */
+.current-card {
+  background-color: #1C9CF6;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 5px;
+  color: white;
+}
+
 .uvi {
   color: white;
   padding: 0 15px;
@@ -30,8 +61,20 @@ body {
   background-color: purple;
 }
 
-/* icon size */
 .icon {
   width: 50px;
   height: 50px;
+}
+
+/* forecast */
+#forecast-tab {
+  padding: 20px;
+  margin: 20px;
+}
+
+.card {
+  background-color: #19C3FB;
+  color: whitesmoke;
+  margin: 10px;
+  padding-top: 5px;
 }
