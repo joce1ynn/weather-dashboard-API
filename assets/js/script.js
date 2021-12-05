@@ -1,15 +1,4 @@
-// search for a city, show weather condition, forecast, and search history
-
-// weather conditon: city name, date, icon, temperature, humidity, wind speed, UV
-
-// UV with color: favorable, moderate, or severe
-
-// forecast: date, icon, temp, wind, humidity
-
-// search history: show weather tab
-
 // --------------------------1. save search history-------------------------------
-var searchTab = $(".form-group");
 var cityInput = $("#city-input");
 var searchBtn = $(".btn");
 var searchHistory = $(".list-group");
@@ -18,6 +7,7 @@ var searchHistory = $(".list-group");
 var cityArray = JSON.parse(localStorage.getItem("savedCity")) || [];
 
 function savedCity() {
+  // prevent page from refreshing
   event.preventDefault();
 
   // create array of searched cities
@@ -45,7 +35,7 @@ function displayList() {
 displayList();
 searchBtn.click(savedCity);
 
-// ------------------2. connect to OpenWeather API---------------
+// --------------2. connect to OpenWeather API---------------
 // get current weather API
 function getCurrentWeather() {
   var currentUrl =
@@ -57,8 +47,8 @@ function getCurrentWeather() {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data); 
-          // displayCurrentWeather();
+          console.log(data);
+          displayCurrentWeather(data);
           getForecast(data);
         });
       } else {
@@ -80,12 +70,46 @@ var getForecast = function (data) {
     cityLat +
     "&lon=" +
     cityLon +
-    "&exclude=current,minutely,hourly&appid=a23926b23cbd7c1d7c67adf9564cfed5";
+    "&exclude=minutely,hourly&appid=a23926b23cbd7c1d7c67adf9564cfed5";
 
   fetch(forecastUrl).then(function (response) {
     response.json().then(function (data) {
-      console.log(data); 
+      console.log(data);
       // displayForecast();
     });
   });
+};
+
+// -----------------3. display current weather
+var city = $("#city");
+var today = $("#today");
+var currentWeatherEl = $("#current-weather");
+
+var displayCurrentWeather = function (data) {
+  city.text(data.name);
+  today.text(" (" + moment().format("MM-DD-YYYY") + ") ");
+  var currentIcon = $(
+    "<img src=http://openweathermap.org/img/wn/" +
+      data.weather[0].icon +
+      "@2x.png>"
+  );
+
+  var currentTemp = $("<p>").text(
+    "Temp: " + ((data.main.temp - 273.15) * 1.8 + 32).toFixed() + "°F"
+  );
+
+  var currentWind = $("<p>").text("Wind: " + data.wind.speed + " MPH");
+  var currentHumidity = $("<p>").text("Humidity: " + data.main.humidity + " %");
+  var uvIndex = $("<p>").text("UV Index: " );
+
+  city.append(today, currentIcon);
+  currentWeatherEl.append(
+    city,
+    currentTemp,
+    currentWind,
+    currentHumidity,
+    uvIndex
+  );
+
+  // var temperature = $("<p>").
 };
