@@ -75,19 +75,19 @@ var getForecast = function (data) {
   fetch(forecastUrl).then(function (response) {
     response.json().then(function (data) {
       console.log(data);
-      // displayForecast();
+      displayForecast(data);
     });
   });
 };
 
-// -----------------3. display current weather
+// -----------------3. display current weather---------------------------
 var city = $("#city");
 var today = $("#today");
 var currentWeatherEl = $("#current-weather");
 
 var displayCurrentWeather = function (data) {
   city.text(data.name);
-  today.text(" (" + moment().format("MM-DD-YYYY") + ") ");
+  today.text(" (" + moment().format("MM/DD/YYYY") + ") ");
   var currentIcon = $(
     "<img src=http://openweathermap.org/img/wn/" +
       data.weather[0].icon +
@@ -99,17 +99,67 @@ var displayCurrentWeather = function (data) {
   );
 
   var currentWind = $("<p>").text("Wind: " + data.wind.speed + " MPH");
-  var currentHumidity = $("<p>").text("Humidity: " + data.main.humidity + " %");
-  var uvIndex = $("<p>").text("UV Index: " );
+  var currentHumidity = $("<p>").text("Humidity: " + data.main.humidity + "%");
 
   city.append(today, currentIcon);
-  currentWeatherEl.append(
-    city,
-    currentTemp,
-    currentWind,
-    currentHumidity,
-    uvIndex
-  );
+  currentWeatherEl.append(city, currentTemp, currentWind, currentHumidity);
+};
 
-  // var temperature = $("<p>").
+// -----------------3. display 5-day forecast---------------------------
+var forecastCard = $("#forecast-cards");
+
+var displayForecast = function (data) {
+  var forecastTitle = $("#future-dates");
+  forecastTitle.text("5-Day Forecast:");
+
+  // 3.1 get uvi
+  var uvi = $("<p>").text("UV Index: " + data.current.uvi);
+  currentWeatherEl.append(uvi);
+
+  function uviColor() {
+    var uviEl = data.current.uvi;
+    if (uviEl <= 2) {
+      uvi.addClass("green");
+    } else if (uviEl > 2 && uviEl <= 5) {
+      uvi.addClass("yellow");
+    } else if (uviEl > 5 && uviEl <= 7) {
+      uvi.addClass("orange");
+    } else if (uviEl > 7 && uviEl <= 10) {
+      uvi.addClass("red");
+    } else {
+      uv.addClass("purple");
+    }
+  }
+  uviColor();
+
+  // 3.2 loop forecast card for 5 days
+  for (var i = 1; i < 6; i++) {
+    var date = $("<p>").text(
+      moment(data.daily[i].dt * 1000).format("MM/DD/YYYY")
+    );
+    var forecastIcon = $(
+      "<img src=http://openweathermap.org/img/wn/" +
+        data.daily[i].weather[0].icon +
+        "@2x.png>"
+    );
+
+    var forecastTemp = $("<p>").text(
+      "Temp: " + ((data.daily[i].temp.day - 273.15) * 1.8 + 32).toFixed() + "°F"
+    );
+
+    var forecastWind = $("<p>").text(
+      "Wind: " + data.daily[i].wind_speed + " MPH"
+    );
+    var forecastHumidity = $("<p>").text(
+      "Humidity: " + data.daily[i].humidity + "%"
+    );
+
+    forecastCard.append(
+      date,
+      forecastIcon,
+      forecastTemp,
+      forecastWind,
+      forecastHumidity
+    );
+  }
 };
