@@ -3,7 +3,7 @@ body {
 }
 
 header {
-  background-color: #0754c7;
+  background-color: #1d5481;
   color: aliceblue;
 }
 
@@ -19,7 +19,7 @@ header {
 }
 
 .list-group-item {
-  background-color: #E3F4FE;
+  background-color: #e3f4fe;
   text-align: center;
   margin: 6px 0;
   border-radius: 5px;
@@ -31,8 +31,11 @@ header {
 }
 
 /* curren weather */
+H2 {
+  font-weight: bold;
+}
 .current-card {
-  background-color: #1C9CF6;
+  background-color: #4594d4;
   padding: 20px;
   margin: 20px;
   border-radius: 5px;
@@ -73,7 +76,7 @@ header {
 }
 
 .card {
-  background-color: #19C3FB;
+  background-color: #7ebbec;
   color: whitesmoke;
   margin: 10px;
   padding-top: 5px;
