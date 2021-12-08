@@ -19,8 +19,6 @@ function savedCity() {
 
   // empty repeated city array elements and city weather history
   searchHistory.empty();
-  currentWeatherEl.empty();
-  forecast.empty();
 
   displayList();
   getCurrentWeather();
@@ -81,6 +79,7 @@ var today = $("#today");
 var currentWeatherEl = $("#current-weather");
 
 var displayCurrentWeather = function (data) {
+  currentWeatherEl.empty();
   city.text(data.name);
   today.text(" (" + moment().format("MM/DD/YYYY") + ") ");
   var currentIcon = $("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png>").addClass("icon");
@@ -119,6 +118,7 @@ var displayForecast = function (data) {
   uviColor();
 
  // 4.2 loop forecast card for 5 days
+  forecast.empty();
   for (var i = 1; i < 6; i++) {
     var date = $("<p>").text(moment(data.daily[i].dt * 1000).format("MM/DD/YYYY"));
     var forecastIcon = $("<img src=http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png>").addClass("icon");
@@ -142,6 +142,7 @@ var displayForecast = function (data) {
 
 //---------------5.display city weather when clicking searched city-------------
 $('.list-group').on('click', 'li', function() {
+  cityInput = $(this).text();
   getCurrentWeather();
 });
 
