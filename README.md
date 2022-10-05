@@ -1,7 +1,7 @@
 # Server-Side APIs: Weather Dashboard
 
 ## Purpose
-The weather dashborad app can display weather outlook for multiple cities, including current weather conditon and 5-day forecast. I was able to use openweather API to retrieve weather data and use localstorage to store persistent data.
+The weather dashborad app can display weather outlook for multiple cities, including current weather condition and 5-day forecast. I was able to use openweather API to retrieve weather data and use localstorage to store persistent data.
 
 ## Build With
 * HTML
